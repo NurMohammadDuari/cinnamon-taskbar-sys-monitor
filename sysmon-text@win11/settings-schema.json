@@ -1,0 +1,48 @@
+{
+  "interval": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 100,
+    "max": 3000,
+    "step": 100,
+    "units": "ms",
+    "description": "Update interval",
+    "tooltip": "How often the taskbar readout and the hover popup refresh. Lower = more realtime, higher = lighter."
+  },
+  "show-cpu": {
+    "type": "switch",
+    "default": true,
+    "description": "Show CPU on taskbar",
+    "tooltip": "Display the total CPU usage percentage in the taskbar text"
+  },
+  "show-memory": {
+    "type": "switch",
+    "default": true,
+    "description": "Show memory on taskbar",
+    "tooltip": "Display used RAM in the taskbar text"
+  },
+  "show-network": {
+    "type": "switch",
+    "default": true,
+    "description": "Show network on taskbar",
+    "tooltip": "Display download/upload rates (▼▲) in the taskbar text"
+  },
+  "popup-network": {
+    "type": "switch",
+    "default": true,
+    "description": "Popup: network section",
+    "tooltip": "Speeds, totals, link speed, MAC, IP and gateway inside the hover card"
+  },
+  "popup-system": {
+    "type": "switch",
+    "default": true,
+    "description": "Popup: System section",
+    "tooltip": "Overall CPU %, memory used/total inside the hover card"
+  },
+  "popup-cores": {
+    "type": "switch",
+    "default": true,
+    "description": "Popup: per-core CPU bars",
+    "tooltip": "One bar per CPU core inside the System section"
+  }
+}

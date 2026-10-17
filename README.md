@@ -8,8 +8,10 @@
   [![made-for-cinnamon](https://img.shields.io/badge/Cinnamon-6.x-yellow?color=E79A3C&style=for-the-badge&logo=cinnamon)](https://cinnamon-spices.linuxmint.com/)
   [![Linux Mint](https://img.shields.io/badge/Linux%20Mint-21%20%7C%2022%20Wilma-green?style=for-the-badge&logo=linuxmint&logoColor=white)](https://linuxmint.com)
   [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+  [![Release](https://img.shields.io/github/v/release/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=2AAEC6)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/releases/latest)
   [![Stars](https://img.shields.io/github/stars/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=FFCC4D)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/stargazers)
   [![Issues](https://img.shields.io/github/issues/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=crimson)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/issues)
+  [![Validate](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml/badge.svg)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml)
 
 </div>
 
@@ -57,6 +59,14 @@ the same layout as the popular `netspeed` app — with **live per-core CPU bars*
 └─────────────────────────────────────────┘
 ```
 
+**Real screenshots of it running** (Linux Mint 22, Cinnamon 6.6):
+
+<p align="center">
+  <img src="docs/screenshots/taskbar.png" alt="cinnamon-sysmon-text CPU MEM network readout on the Linux Mint Cinnamon taskbar; readout sits with the panel icons before the clock" width="45%"/>
+  &nbsp;&nbsp;
+  <img src="docs/screenshots/popup.png" alt="netspeed-style hover popup of cinnamon-sysmon-text showing download/upload speeds, totals, MAC, IP address, gateway and per-core CPU bars" width="45%"/>
+</p>
+
 ## ✨ Features
 
 - ✅ **Taskbar CPU, RAM and network readout** — realtime, 4 updates/sec
@@ -64,30 +74,51 @@ the same layout as the popular `netspeed` app — with **live per-core CPU bars*
 - ✅ **Per-core CPU usage bars** (up to 8 cores, text-drawn, always aligned)
 - ✅ **Monospace-padded fields** — panel icons **never shift** when numbers change
 - ✅ **Zero dependencies** — no GNOME libs, no Python, no binaries; pure `/proc` & `/sys` parsing
+- ✅ **Configurable!** — right-click → **Configure…**:
+  - update interval (100 ms – 3 s)
+  - show/hide `CPU` / `MEM` / `▼▲` on the taskbar
+  - show/hide the popup sections (network / system / per-core bars)
 - ✅ Auto-detects the **default network interface** (falls back to the default route)
 - ✅ Hover opens in 0.2 s, closes 0.3 s after leaving (**no flicker**); click toggles
-- ✅ Works on both horizontal panels; ~14 KB total, pure JS
+- ✅ Works on both horizontal panels; pure JS, no build step
 
 ## 📦 Install (Linux Mint / Cinnamon 6.x)
+
+**One-liner** (curl + bash):
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/NurMohammadDuari/cinnamon-sysmon-text/main/install.sh)
+```
+
+**From source:**
 
 ```bash
 git clone https://github.com/NurMohammadDuari/cinnamon-sysmon-text.git
 cd cinnamon-sysmon-text
-mkdir -p ~/.local/share/cinnamon/applets
-cp -r sysmon-text@win11 ~/.local/share/cinnamon/applets/
+bash install.sh
 ```
 
-Then enable it:
+Manual install: copy `sysmon-text@win11/` to `~/.local/share/cinnamon/applets/`; then enable the applet in Cinnamon Settings → Applets:
 
-1. Right-click the panel → **Applets** (or open *Cinnamon Settings → Applets*)
+1. Right-click the panel → **Applets**
 2. Find **SysMon Text** under *Manage → Available applets* → **+** to add
-3. Drag it where you like on the panel
+3. Drag it wherever you like on the panel
+4. Right-click it → **Configure…** for the popup/field toggles
 
-If it doesn't appear instantly, reload the shell:
+Uninstall: `bash uninstall.sh`.
 
-```bash
-cinnamon --replace
-```
+## 🔧 Configuration
+
+Every option is exposed through Cinnamon's native settings dialog —
+right-click the taskbar readout → **Configure…**
+
+| Setting | Type | Default | What it does |
+|---|---|---|---|
+| Update interval | spinbutton | 500 ms | refresh cadence of the whole applet |
+| Show CPU/MEM/NET | switches | on | taskbar text composition |
+| Popup network section | switch | on | speeds, totals, link speed, MAC, IP, gateway |
+| Popup System section | switch | on | overall CPU %, memory |
+| Popup per-core bars | switch | on | one bar per CPU core |
 
 ## 🔍 How it works (tech notes)
 
@@ -103,8 +134,36 @@ cinnamon --replace
 | Interface auto-detect | first non-loopback default route in `/proc/net/route` |
 
 Built on the standard Cinnamon applet API: `Applet.AppletPopupMenu`,
-`PopupMenu.PopupMenuManager`, `St.BoxLayout`, and `GenericContainer`-compatible
-`addActor()` layout.
+`PopupMenu.PopupMenuManager`, `Settings.AppletSettings`, `St.BoxLayout`, and
+`GenericContainer`-compatible `addActor()` layout.
+
+## 🧪 Tests
+
+Offline validation (JSON schemas, JS syntax, settings bindings, imports hygiene):
+
+```bash
+python3 tests/validate.py
+```
+
+CI runs it on every push — see the [Validate workflow](
+https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml).
+
+## ❓ FAQ
+
+<details>
+<summary><b>Is this available for GNOME Shell / XFCE / KDE?</b></summary>
+Not yet — this is written against the Cinnamon applet API (Mint's taskbar exists only in Cinnamon). Ports welcome as forks/drop-ins if your DE reuses Cinnamon's panel conventions.
+</details>
+
+<details>
+<summary><b>Is KB/s here based on 1024 or 1000?</b></summary>
+Binary (1024): `B → K → M` like `ls`. The netspeed egui app uses decimal — minor differences of a few % are formatting, not different traffic.
+</details>
+
+<details>
+<summary><b>Does it work on vertical panels?</b></summary>
+Not officially tested. In theory TextApplet handles the orientation; the popup may look funny. Try it and report.
+</details>
 
 ## 🖼️ Popup design credit
 
@@ -116,6 +175,20 @@ The card layout — *interface, speeds, totals, max speed, MAC* — is modeled a
 **This project is maintained by [NurMohammadDuari](https://github.com/NurMohammadDuari) only.**
 Pushes to `main` are restricted to the code owner
 (see [`.github/CODEOWNERS`](.github/CODEOWNERS)). Issues and bug reports are always welcome!
+
+## 📂 Repository layout
+
+| Path | Purpose |
+|---|---|
+| `sysmon-text@win11/applet.js` | the whole applet |
+| `sysmon-text@win11/metadata.json` | applet metadata (uuid, name, version) |
+| `sysmon-text@win11/settings-schema.json` | native Cinnamon settings panel definition |
+| `install.sh` / `uninstall.sh` | one-step install / removal |
+| `tests/validate.py` | offline validation suite used by CI |
+| `docs/screenshots/` | real screenshots used above |
+
+### 📜 Changelog
+See [CHANGELOG.md](CHANGELOG.md) for what's new in each version.
 
 ## 📜 License
 

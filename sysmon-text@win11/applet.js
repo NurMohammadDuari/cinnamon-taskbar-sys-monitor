@@ -4,17 +4,19 @@ const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
+const Settings = imports.ui.settings;
 const Lang = imports.lang;
 
-function MyApplet(orientation, panelHeight, instanceId) {
-  this._init(orientation, panelHeight, instanceId);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+  this._init(metadata, orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
   __proto__: Applet.TextApplet.prototype,
 
-  _init: function(orientation, panelHeight, instanceId) {
+  _init: function(metadata, orientation, panelHeight, instanceId) {
     Applet.TextApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
+    this.metadata = metadata;
     this.actor.style_class = 'sysmon-text-label';
     // Monospace + padded fields = constant pixel width, so the readout
     // never resizes and pinned taskbar icons stay put.
@@ -28,6 +30,25 @@ MyApplet.prototype = {
     this._prevCpu = null;
     this._prevT = 0;
     this._iface = this._defaultIface();
+    this._loopTid = 0;
+
+    // --- configurable via right-click -> Configure ---
+    this.interval = 500;
+    this.showCpu = true;
+    this.showMemory = true;
+    this.showNetwork = true;
+    this.popupNetwork = true;
+    this.popupSystem = true;
+    this.popupCores = true;
+    this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', this._applyInterval, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-cpu', 'showCpu', this._onToggle, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-memory', 'showMemory', this._onToggle, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-network', 'showNetwork', this._onToggle, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'popup-network', 'popupNetwork', this._applyGroups, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'popup-system', 'popupSystem', this._applyGroups, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'popup-cores', 'popupCores', this._applyGroups, null);
+
     this.set_applet_label('…');
 
     this._buildMenu(orientation);
@@ -42,6 +63,28 @@ MyApplet.prototype = {
 
     this._tick();       // instant first paint
     this._startLoop();  // then realtime repeat
+  },
+
+  // ---------------------------------------------------------------- settings
+  _applyInterval: function() {
+    // restart the realtime loop with the configured cadence
+    if (this._loopTid) { Mainloop.source_remove(this._loopTid); this._loopTid = 0; }
+    this._startLoop();
+  },
+
+  _onToggle: function() {
+    // taskbar text composition changed settings — repaint instantly
+    this._prevT = 0; // force a fresh CPU sample so no bogus -values appear
+    this._tick();
+  },
+
+  _applyGroups: function() {
+    if (!this._groupWidgets) return;
+    for (let w of (this._groupWidgets.network || []))
+      if (w && w.set_visible) w.set_visible(this.popupNetwork);
+    let sys = this._groupWidgets.system || [];
+    for (let i = 0; i < sys.length; i++)
+      if (sys[i].set_visible) sys[i].set_visible(this.popupSystem && !(sys[i]._isCoreRow && !this.popupCores));
   },
 
   // ---------------------------------------------------------------- helpers
@@ -140,6 +183,9 @@ MyApplet.prototype = {
     root.add(this._separator());
 
     this._popup = {};
+    this._groupWidgets = { network: [], system: [] };
+    this._groupWidgets.network.push(root.get_children()[(root.get_children().length - 2)]);
+    this._groupWidgets.network.push(root.get_children()[(root.get_children().length - 1)]);
     let rows = [
       ['Download speed',  'down'],
       ['Upload speed',    'up'],
@@ -154,10 +200,13 @@ MyApplet.prototype = {
       let r = this._row(rows[i][0]);
       this._popup[rows[i][1]] = r.val;
       root.add(r.box);
+      this._groupWidgets.network.push(r.box);
     }
 
     root.add(this._separator());
     root.add(this._headerRow('System'));
+    this._groupWidgets.system.push(root.get_children()[(root.get_children().length - 2)]);
+    this._groupWidgets.system.push(root.get_children()[(root.get_children().length - 1)]);
 
     let sysRows = [
       ['CPU usage',  'cpu'],
@@ -167,6 +216,7 @@ MyApplet.prototype = {
       let r = this._row(sysRows[i][0]);
       this._popup[sysRows[i][1]] = r.val;
       root.add(r.box);
+      this._groupWidgets.system.push(r.box);
     }
 
     // per-core rows (up to 8 cores are shown)
@@ -176,7 +226,11 @@ MyApplet.prototype = {
       let r = this._row('Core ' + i);
       this._popup.cores.push(r.val);
       root.add(r.box);
+      r.box._isCoreRow = true;
+      this._groupWidgets.system.push(r.box);
     }
+
+    this._applyGroups();
 
     let item = new PopupMenu.PopupBaseMenuItem({
       reactive: false,
@@ -286,6 +340,8 @@ MyApplet.prototype = {
   on_applet_removed_from_panel: function() {
     if (this._openTid) Mainloop.source_remove(this._openTid);
     if (this._closeTid) Mainloop.source_remove(this._closeTid);
+    if (this._loopTid) Mainloop.source_remove(this._loopTid);
+    if (this.settings) try { this.settings.finalize(); } catch(e) {}
     if (this.menu) this.menu.destroy();
   },
 
@@ -358,11 +414,11 @@ MyApplet.prototype = {
       let cpuStr = (cpuPct === null) ? ' --%' : (cpuPct + '%');
       while (cpuStr.length < 4) cpuStr = ' ' + cpuStr;
 
-      let label =
-        'CPU ' + cpuStr +
-        ' MEM ' + this._fmtMem(memUsed) +
-        ' ▼' + this._fmtRate(downR) + ' ▲' + this._fmtRate(upR);
-
+      let label = '';
+      if (this.showCpu) label += 'CPU ' + cpuStr;
+      if (this.showMemory) label += (label ? ' ' : '') + 'MEM ' + this._fmtMem(memUsed);
+      if (this.showNetwork) label += (label ? ' ' : '') + ('▼' + this._fmtRate(downR) + ' ▲' + this._fmtRate(upR));
+      if (!label) label = '👷 ' + Math.round(memTotal / 1024) + 'M host';
       // Don't rescale the panel source actor while a popup is open:
       // panel relayout would close the menu mid-hover.
       if (!(this.menu && this.menu.isOpen)) this.set_applet_label(label);
@@ -380,10 +436,10 @@ MyApplet.prototype = {
   },
 
   _startLoop: function() {
-    Mainloop.timeout_add(500, () => this._tick());
+    this._loopTid = Mainloop.timeout_add(this.interval > 0 ? this.interval : 500, () => this._tick());
   }
 };
 
 function main(metadata, orientation, panelHeight, instanceId) {
-  return new MyApplet(orientation, panelHeight, instanceId);
+  return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }

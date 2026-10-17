@@ -2,5 +2,7 @@
   "uuid": "sysmon-text@win11",
   "name": "SysMon Text",
   "description": "Realtime text readout: CPU MEM NET DISK speeds",
-  "max-instances": 1
+  "max-instances": 1,
+  "version": "1.1.0",
+  "settings-schema": "sysmon-text@win11"
 }

@@ -3,6 +3,20 @@
 All notable changes to **cinnamon-sysmon-text** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.0] — 2026-10-17
+
+### Added
+- **Native Cinnamon settings** (right-click → Configure…):
+  update-interval spinbutton (100 ms – 3 s), taskbar CPU/MEM/NET
+  field toggles, and popup section toggles (network / system / per-core bars)
+- `install.sh` / `uninstall.sh` one-step scripts (incl. one-line `curl | bash`)
+- `tests/validate.py` offline validation suite, wired into CI
+- CI now also parse-checks the shell scripts
+- `SECURITY.md` + `SUPPORT.md`, real screenshots embedded in the README
+- GitHub labels, milestone and release packaging
+### Changed
+- `metadata.json` gained `version` and `settings-schema` keys
+
 ## [1.0.0] — 2026-10-17
 
 ### Added
