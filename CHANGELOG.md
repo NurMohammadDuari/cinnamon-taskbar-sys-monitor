@@ -3,6 +3,12 @@
 All notable changes to **cinnamon-sysmon-text** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+### Added (docs)
+- Full documentation set under `docs/`: INSTALL, CONFIGURATION, ARCHITECTURE
+  (component map + tick pipeline + data sources), TROUBLESHOOTING,
+  DEVELOPMENT (hot-reload loop, API pitfalls, release checklist), ROADMAP
+- README now links the whole 📚 Documentation hub
+
 ## [1.1.0] — 2026-10-17
 
 ### Added

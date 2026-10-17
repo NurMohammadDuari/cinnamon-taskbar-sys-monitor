@@ -170,6 +170,19 @@ Not officially tested. In theory TextApplet handles the orientation; the popup m
 The card layout — *interface, speeds, totals, max speed, MAC* — is modeled after the
 **netspeed** app (Rust/egui). The per-core bars and System section are additions.
 
+## 📚 Documentation
+
+| Doc | What's inside |
+|---|---|
+| [docs/INSTALL.md](docs/INSTALL.md) | 🚀 every install path (one-liner, git, zip, manual), upgrading, file locations |
+| [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | ⚙️ reference for all 7 settings, example configs, where values are stored |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 🧠 component map, tick pipeline, data sources table, performance profile |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | 🔧 symptom → fix, incl. *"problems during Cinnamon startup"*, frozen label, CPU pinned at 100% |
+| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | 💻 hot-reload loop, API pitfalls, offline test suite, release checklist |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | 🗺️ what's next, priority voting, non-goals |
+| [SUPPORT.md](SUPPORT.md) | 🆘 where to ask + quick fixes |
+| [CHANGELOG.md](CHANGELOG.md) | 📜 version history |
+
 ## 🤝 Contributions
 
 **This project is maintained by [NurMohammadDuari](https://github.com/NurMohammadDuari) only.**
