@@ -14,14 +14,14 @@ Three ways to get the taskbar readout. All of them end with enabling the
 ## Method 1 — one line, no clone
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/NurMohammadDuari/cinnamon-sysmon-text/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/main/install.sh)
 ```
 
 ## Method 2 — clone and run the installer (recommended)
 
 ```bash
-git clone https://github.com/NurMohammadDuari/cinnamon-sysmon-text.git
-cd cinnamon-sysmon-text
+git clone https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor.git
+cd cinnamon-taskbar-sys-monitor
 bash install.sh
 ```
 
@@ -36,16 +36,16 @@ bash uninstall.sh
 
 ## Method 3 — release zip
 
-Download [`cinnamon-sysmon-text-v1.1.0.zip`](
-https://github.com/NurMohammadDuari/cinnamon-sysmon-text/releases/latest),
+Download [`cinnamon-taskbar-sys-monitor-v1.1.0.zip`](
+https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/releases/latest),
 extract, run `bash install.sh` inside.
 
 ## Method 4 — fully manual
 
 ```bash
 mkdir -p ~/.local/share/cinnamon/applets
-git clone https://github.com/NurMohammadDuari/cinnamon-sysmon-text.git
-cp -r cinnamon-sysmon-text/sysmon-text@win11 ~/.local/share/cinnamon/applets/
+git clone https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor.git
+cp -r cinnamon-taskbar-sys-monitor/sysmon-text@win11 ~/.local/share/cinnamon/applets/
 cinnamon --replace     # optional, registers the applet immediately
 ```
 
@@ -67,7 +67,7 @@ cinnamon --replace     # optional, registers the applet immediately
 ## Upgrading
 
 ```bash
-cd cinnamon-sysmon-text
+cd cinnamon-taskbar-sys-monitor
 git pull
 bash install.sh       # overwrites the applet files, keeps your settings
 ```

@@ -1,4 +1,4 @@
-# Contributor covenant — cinnamon-sysmon-text
+# Contributor covenant — cinnamon-taskbar-sys-monitor
 
 **This repository is maintained exclusively by [@NurMohammadDuari](https://github.com/NurMohammadDuari/).**
 

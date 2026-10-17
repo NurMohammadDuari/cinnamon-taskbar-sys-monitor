@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **cinnamon-sysmon-text** are documented here.
+All notable changes to **cinnamon-taskbar-sys-monitor** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (docs)

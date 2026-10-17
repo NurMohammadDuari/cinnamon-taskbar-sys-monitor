@@ -16,7 +16,7 @@ your desktop session. Its attack surface is limited to:
 - invoking `ip` via `GLib.spawn_command_line_sync`
 
 **How to report:** use [Private vulnerability reporting](
-https://github.com/NurMohammadDuari/cinnamon-sysmon-text/security/advisories/new).
+https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/security/advisories/new).
 Please do **not** open a public issue for security problems.
 
 You will get a reply within 72 hours. Responsible disclosure appreciated.

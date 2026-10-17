@@ -1,17 +1,17 @@
 <div align="center">
-  <img src=".github/assets/banner.svg" alt="cinnamon-sysmon-text — realtime CPU, RAM and network speed readout applet for Linux Mint Cinnamon taskbar" width="820"/>
+  <img src=".github/assets/banner.svg" alt="cinnamon-taskbar-sys-monitor — realtime CPU, RAM and network speed readout applet for Linux Mint Cinnamon taskbar" width="820"/>
 
-  # ⏱️ ⚡ cinnamon-sysmon-text
+  # ⏱️ ⚡ cinnamon-taskbar-sys-monitor
 
   **Realtime CPU · RAM · Network-speed readout applet for the Linux Mint (Cinnamon) taskbar — with a netspeed-style hover popup.**
 
   [![made-for-cinnamon](https://img.shields.io/badge/Cinnamon-6.x-yellow?color=E79A3C&style=for-the-badge&logo=cinnamon)](https://cinnamon-spices.linuxmint.com/)
   [![Linux Mint](https://img.shields.io/badge/Linux%20Mint-21%20%7C%2022%20Wilma-green?style=for-the-badge&logo=linuxmint&logoColor=white)](https://linuxmint.com)
   [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-  [![Release](https://img.shields.io/github/v/release/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=2AAEC6)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/releases/latest)
-  [![Stars](https://img.shields.io/github/stars/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=FFCC4D)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/stargazers)
-  [![Issues](https://img.shields.io/github/issues/NurMohammadDuari/cinnamon-sysmon-text?style=for-the-badge&color=crimson)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/issues)
-  [![Validate](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml/badge.svg)](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml)
+  [![Release](https://img.shields.io/github/v/release/NurMohammadDuari/cinnamon-taskbar-sys-monitor?style=for-the-badge&color=2AAEC6)](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/releases/latest)
+  [![Stars](https://img.shields.io/github/stars/NurMohammadDuari/cinnamon-taskbar-sys-monitor?style=for-the-badge&color=FFCC4D)](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/stargazers)
+  [![Issues](https://img.shields.io/github/issues/NurMohammadDuari/cinnamon-taskbar-sys-monitor?style=for-the-badge&color=crimson)](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/issues)
+  [![Validate](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/actions/workflows/lint.yml/badge.svg)](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/actions/workflows/lint.yml)
 
 </div>
 
@@ -62,9 +62,9 @@ the same layout as the popular `netspeed` app — with **live per-core CPU bars*
 **Real screenshots of it running** (Linux Mint 22, Cinnamon 6.6):
 
 <p align="center">
-  <img src="docs/screenshots/taskbar.png" alt="cinnamon-sysmon-text CPU MEM network readout on the Linux Mint Cinnamon taskbar; readout sits with the panel icons before the clock" width="45%"/>
+  <img src="docs/screenshots/taskbar.png" alt="cinnamon-taskbar-sys-monitor CPU MEM network readout on the Linux Mint Cinnamon taskbar; readout sits with the panel icons before the clock" width="45%"/>
   &nbsp;&nbsp;
-  <img src="docs/screenshots/popup.png" alt="netspeed-style hover popup of cinnamon-sysmon-text showing download/upload speeds, totals, MAC, IP address, gateway and per-core CPU bars" width="45%"/>
+  <img src="docs/screenshots/popup.png" alt="netspeed-style hover popup of cinnamon-taskbar-sys-monitor showing download/upload speeds, totals, MAC, IP address, gateway and per-core CPU bars" width="45%"/>
 </p>
 
 ## ✨ Features
@@ -87,14 +87,14 @@ the same layout as the popular `netspeed` app — with **live per-core CPU bars*
 **One-liner** (curl + bash):
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/NurMohammadDuari/cinnamon-sysmon-text/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/main/install.sh)
 ```
 
 **From source:**
 
 ```bash
-git clone https://github.com/NurMohammadDuari/cinnamon-sysmon-text.git
-cd cinnamon-sysmon-text
+git clone https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor.git
+cd cinnamon-taskbar-sys-monitor
 bash install.sh
 ```
 
@@ -146,7 +146,7 @@ python3 tests/validate.py
 ```
 
 CI runs it on every push — see the [Validate workflow](
-https://github.com/NurMohammadDuari/cinnamon-sysmon-text/actions/workflows/lint.yml).
+https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/actions/workflows/lint.yml).
 
 ## ❓ FAQ
 

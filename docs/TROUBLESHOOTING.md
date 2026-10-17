@@ -115,6 +115,6 @@ bash install.sh        # clean reinstall from the repo copy
 ```
 
 Still stuck → [open an issue](
-https://github.com/NurMohammadDuari/cinnamon-sysmon-text/issues/new?labels=bug&template=bug_report.md)
+https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/issues/new?labels=bug&template=bug_report.md)
 with your Cinnamon version, Mint version, and the relevant lines of
 `~/.xsession-errors`.

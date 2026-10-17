@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline validation for cinnamon-sysmon-text.
+"""Offline validation for cinnamon-taskbar-sys-monitor.
 
 Run locally or in CI — no Cinnamon session required:
 

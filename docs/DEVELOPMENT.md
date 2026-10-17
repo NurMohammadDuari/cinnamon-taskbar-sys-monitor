@@ -1,6 +1,6 @@
 # 💻 Development guide
 
-How to hack on **cinnamon-sysmon-text** with a fast edit-reload loop, and how
+How to hack on **cinnamon-taskbar-sys-monitor** with a fast edit-reload loop, and how
 the offline tests back you up.
 
 ## Repo map (what touches what)

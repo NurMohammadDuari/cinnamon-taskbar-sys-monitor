@@ -39,5 +39,5 @@ Ordered by demand. Items completed are moved to the bottom [Changelog](../CHANGE
 ## Priority voting 👍
 
 Leave a `+1` reaction on the matching discussion thread
-([Discussions → Ideas](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/discussions)),
+([Discussions → Ideas](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/discussions)),
 or open a feature request issue — the loudest items get done first.

@@ -1,6 +1,6 @@
 # ⚙️ Configuration guide
 
-Every knob of **cinnamon-sysmon-text** lives in Cinnamon's native settings UI:
+Every knob of **cinnamon-taskbar-sys-monitor** lives in Cinnamon's native settings UI:
 right-click the taskbar readout → **Configure…** (or *Cinnamon Settings → Applets →
 SysMon Text → Configure*).
 

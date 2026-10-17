@@ -1,13 +1,13 @@
 # Support
 
-Need help with **cinnamon-sysmon-text**?
+Need help with **cinnamon-taskbar-sys-monitor**?
 
 | Question | Place |
 |---|---|
-| 🐛 It doesn't show / shows wrong values | [Open an issue](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/issues/new?labels=bug&template=bug_report.md) |
-| 💡 Feature ideas | [Disscussions](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/discussions) |
-| ❓ Quick questions | [Disscussions](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/discussions) |
-| 🔐 Security problems | [Private report](https://github.com/NurMohammadDuari/cinnamon-sysmon-text/security/advisories/new) |
+| 🐛 It doesn't show / shows wrong values | [Open an issue](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/issues/new?labels=bug&template=bug_report.md) |
+| 💡 Feature ideas | [Disscussions](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/discussions) |
+| ❓ Quick questions | [Disscussions](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/discussions) |
+| 🔐 Security problems | [Private report](https://github.com/NurMohammadDuari/cinnamon-taskbar-sys-monitor/security/advisories/new) |
 
 ## Quick troubleshooting
 
